@@ -40,15 +40,15 @@ def predict(filename):
     annotated_image = results[0].plot()
     annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
 
-    unix_time = int(time.time())
+    # unix_time = int(time.time())
     
     damage = count_damage(results)
 
     if(damage > 0):
-        write_image_cv2(f'''./result/{unix_time}.jpg''', annotated_image_rgb)
+        write_image_cv2(f'''./result/{filename}.jpg''', annotated_image_rgb)
 
         response = {
-            "filename": f'''{unix_time}.jpg''',
+            "filename": f'''{filename}.jpg''',
             "is_damaged": True,
             "damage_precent": damage
         }
