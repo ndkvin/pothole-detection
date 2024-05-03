@@ -6,7 +6,7 @@ from model.predict import predict
 import os
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None)
 
 @app.get("/")
 def read_root():
