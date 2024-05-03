@@ -36,6 +36,7 @@ def count_damage(results):
 def predict(filename):
     model = YOLO('./model/best.pt')
     results = model.predict(f'''./tmp/{filename}''', imgsz=640, conf=0.5)
+    print(filename)
     # Load the image from file
     annotated_image = results[0].plot()
     annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
@@ -45,12 +46,11 @@ def predict(filename):
     damage = count_damage(results)
 
     if(damage > 0):
-        write_image_cv2(f'''./result/{filename}.jpg''', annotated_image_rgb)
+        write_image_cv2(f'''./result/{filename}''', annotated_image_rgb)
 
         response = {
-            "filename": f'''{filename}.jpg''',
-            "is_damaged": True,
-            "damage_precent": damage
+            "filename": f'''{filename}''',
+            "is_damaged": True
         }
 
         return response
